@@ -27,7 +27,7 @@ export default function SignInForm() {
               Iniciar Sesión<nav></nav>
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              !Introduce tu email y contraseña para iniciar sesión!
+              ¡Introduce tu email y contraseña para iniciar sesión!
             </p>
           </div>
           <div>

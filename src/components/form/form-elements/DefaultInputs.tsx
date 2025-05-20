@@ -3,111 +3,109 @@ import ComponentCard from "../../common/ComponentCard";
 import Label from "../Label";
 import Input from "../input/InputField";
 import Select from "../Select";
-import { EyeCloseIcon, EyeIcon, TimeIcon } from "../../../icons";
-import DatePicker from "../date-picker.tsx";
+import DatePicker from "../date-picker";
+import { EyeCloseIcon, EyeIcon } from "../../../icons";
+import DropZone from "./DropZone"; 
 
 export default function DefaultInputs() {
   const [showPassword, setShowPassword] = useState(false);
-  const options = [
-    { value: "marketing", label: "Marketing" },
-    { value: "template", label: "Template" },
-    { value: "development", label: "Development" },
+
+  const generoOptions = [
+    { value: "masculino", label: "Masculino" },
+    { value: "femenino", label: "Femenino" },
+    { value: "otro", label: "Otro" },
   ];
-  const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
-  };
+
+  const actividadOptions = [
+    { value: "sedentario", label: "Sedentario" },
+    { value: "ligera", label: "Ligera actividad" },
+    { value: "moderada", label: "Actividad moderada" },
+    { value: "intensa", label: "Muy activa" },
+  ];
+
+  const objetivoOptions = [
+    { value: "perder", label: "Perder peso" },
+    { value: "aumentar", label: "Aumentar peso" },
+    { value: "masa", label: "Ganar masa muscular" },
+  ];
 
   return (
-    <ComponentCard title="Default Inputs">
+    <ComponentCard title="Formulario de Datos Personales y Ficha Técnica">
       <div className="space-y-6">
+        {/* FOTO DE PERFIL */}
         <div>
-          <Label htmlFor="input">Input</Label>
-          <Input type="text" id="input" />
+          <h2 className="text-xl font-semibold">Foto de perfil</h2>
+          <DropZone />
         </div>
+
+        {/* DATOS PERSONALES */}
+        <h2 className="text-xl font-semibold pt-6">Datos Personales</h2>
+
         <div>
-          <Label htmlFor="inputTwo">Input with Placeholder</Label>
-          <Input type="text" id="inputTwo" placeholder="info@gmail.com" />
-        </div>
-        <div>
-          <Label>Select Input</Label>
-          <Select
-            options={options}
-            placeholder="Select an option"
-            onChange={handleSelectChange}
-            className="dark:bg-dark-900"
-          />
-        </div>
-        <div>
-          <Label>Password Input</Label>
-          <div className="relative">
-            <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-            />
-            <button
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
-            >
-              {showPassword ? (
-                <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
-              ) : (
-                <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
-              )}
-            </button>
-          </div>
+          <Label htmlFor="nombre">Nombre</Label>
+          <Input type="text" id="nombre" placeholder="Ej. Juan" />
         </div>
 
         <div>
+          <Label htmlFor="apellido">Apellido</Label>
+          <Input type="text" id="apellido" placeholder="Ej. Rodríguez" />
+        </div>
+
+        <div>
+          <Label htmlFor="correo">Correo Electrónico</Label>
+          <Input type="email" id="correo" placeholder="ejemplo@email.com" />
+        </div>
+
+        <div>
+          <Label htmlFor="telefono">Teléfono</Label>
+          <Input type="tel" id="telefono" placeholder="3001234567" />
+        </div>
+
+        <div>
+          <Label>Fecha de nacimiento</Label>
           <DatePicker
-            id="date-picker"
-            label="Date Picker Input"
-            placeholder="Select a date"
+            id="fechaNacimiento"
+            placeholder="Selecciona tu fecha de nacimiento"
             onChange={(dates, currentDateString) => {
-              // Handle your logic
               console.log({ dates, currentDateString });
             }}
           />
         </div>
 
         <div>
-          <Label htmlFor="tm">Time Picker Input</Label>
-          <div className="relative">
-            <Input
-              type="time"
-              id="tm"
-              name="tm"
-              onChange={(e) => console.log(e.target.value)}
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <TimeIcon className="size-6" />
-            </span>
-          </div>
+          <Label>Género</Label>
+          <Select
+            options={generoOptions}
+            placeholder="Selecciona tu género"
+            onChange={(value) => console.log("Género:", value)}
+          />
         </div>
+
+        {/* FICHA TÉCNICA */}
+        <h2 className="text-xl font-semibold pt-6">Ficha Técnica</h2>
+
         <div>
-          <Label htmlFor="tm">Input with Payment</Label>
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="Card number"
-              className="pl-[62px]"
-            />
-            <span className="absolute left-0 top-1/2 flex h-11 w-[46px] -translate-y-1/2 items-center justify-center border-r border-gray-200 dark:border-gray-800">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="6.25" cy="10" r="5.625" fill="#E80B26" />
-                <circle cx="13.75" cy="10" r="5.625" fill="#F59D31" />
-                <path
-                  d="M10 14.1924C11.1508 13.1625 11.875 11.6657 11.875 9.99979C11.875 8.33383 11.1508 6.8371 10 5.80713C8.84918 6.8371 8.125 8.33383 8.125 9.99979C8.125 11.6657 8.84918 13.1625 10 14.1924Z"
-                  fill="#FC6020"
-                />
-              </svg>
-            </span>
-          </div>
+          <Label htmlFor="edad">Edad</Label>
+          <Input type="number" id="edad" placeholder="Ej. 25" />
+        </div>
+
+        <div>
+          <Label htmlFor="peso">Peso (kg)</Label>
+          <Input type="number" id="peso" placeholder="Ej. 70" />
+        </div>
+
+        <div>
+          <Label htmlFor="altura">Altura (cm)</Label>
+          <Input type="number" id="altura" placeholder="Ej. 175" />
+        </div>
+
+        <div>
+          <Label>Nivel de actividad física</Label>
+          <Select
+            options={actividadOptions}
+            placeholder="Selecciona tu nivel"
+            onChange={(value) => console.log("Actividad:", value)}
+          />
         </div>
       </div>
     </ComponentCard>
