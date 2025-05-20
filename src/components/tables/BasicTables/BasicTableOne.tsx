@@ -1,222 +1,106 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "../../ui/table";
+import React, { useState } from "react";
+import ComponentCard from "../../common/ComponentCard";
+import Select from "../../form/Select";
+import { PlayIcon, ClockIcon, FlameIcon } from "lucide-react";
 
-import Badge from "../../ui/badge/Badge";
+const objetivos = [
+  { value: "ganar", label: "Ganar masa muscular" },
+  { value: "perder", label: "Perder peso" },
+  { value: "aumentar", label: "Aumentar peso" },
+  { value: "mantener", label: "Mantenerse en forma" },
+];
 
-interface Order {
-  id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  budget: string;
-}
-
-// Define the table data using the interface
-const tableData: Order[] = [
+const ejercicios = [
   {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Web Designer",
-    },
-    projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
-    budget: "3.9K",
-    status: "Active",
+    grupo: "Bíceps",
+    nombre: "Curl con barra",
+    duracion: "10 Min",
+    repeticiones: "3 Rep",
+    imagen: "/images/ejercicios/curl-barra.jpg",
+    objetivos: ["ganar", "aumentar"],
   },
   {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "Project Manager",
-    },
-    projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
-    budget: "24.9K",
-    status: "Pending",
+    grupo: "Cardio",
+    nombre: "Caminata rápida",
+    duracion: "20 Min",
+    repeticiones: "1 Sesión",
+    imagen: "/images/ejercicios/cardio.jpg",
+    objetivos: ["perder", "mantener"],
   },
   {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "Content Writing",
-    },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
-    status: "Active",
+    grupo: "Piernas",
+    nombre: "Sentadillas",
+    duracion: "15 Min",
+    repeticiones: "4 Rep",
+    imagen: "/images/ejercicios/sentadillas.jpg",
+    objetivos: ["ganar", "aumentar", "mantener"],
   },
   {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "Digital Marketer",
-    },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
-    status: "Cancel",
+    grupo: "Abdomen",
+    nombre: "Crunch abdominal",
+    duracion: "10 Min",
+    repeticiones: "3 Rep",
+    imagen: "/images/ejercicios/crunch.jpg",
+    objetivos: ["perder", "mantener"],
   },
   {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "Front-end Developer",
-    },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
-    status: "Active",
+    grupo: "Espalda",
+    nombre: "Remo con barra",
+    duracion: "15 Min",
+    repeticiones: "4 Rep",
+    imagen: "/images/ejercicios/remo-barra.jpg",
+    objetivos: ["ganar", "aumentar"],
   },
 ];
 
 export default function BasicTableOne() {
-  return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
-      <div className="max-w-full overflow-x-auto">
-        <Table>
-          {/* Table Header */}
-          <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
-            <TableRow>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                User
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Project Name
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Team
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Status
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Budget
-              </TableCell>
-            </TableRow>
-          </TableHeader>
+  const [objetivo, setObjetivo] = useState("ganar");
 
-          {/* Table Body */}
-          <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-            {tableData.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="px-5 py-4 sm:px-6 text-start">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 overflow-hidden rounded-full">
-                      <img
-                        width={40}
-                        height={40}
-                        src={order.user.image}
-                        alt={order.user.name}
-                      />
-                    </div>
-                    <div>
-                      <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                        {order.user.name}
-                      </span>
-                      <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                        {order.user.role}
-                      </span>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {order.projectName}
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  <div className="flex -space-x-2">
-                    {order.team.images.map((teamImage, index) => (
-                      <div
-                        key={index}
-                        className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                      >
-                        <img
-                          width={24}
-                          height={24}
-                          src={teamImage}
-                          alt={`Team member ${index + 1}`}
-                          className="w-full size-6"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  <Badge
-                    size="sm"
-                    color={
-                      order.status === "Active"
-                        ? "success"
-                        : order.status === "Pending"
-                        ? "warning"
-                        : "error"
-                    }
-                  >
-                    {order.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                  {order.budget}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+  const ejerciciosFiltrados = ejercicios.filter((ej) =>
+    ej.objetivos.includes(objetivo)
+  );
+
+  return (
+    <ComponentCard title="Rutinas por Objetivo">
+      <div className="mb-8">
+        <h2 className="text-lg font-semibold text-gray-700 dark:text-white mb-2">Selecciona tu objetivo</h2>
+        <Select
+          options={objetivos}
+          onChange={(value) => setObjetivo(value)}
+          placeholder="Selecciona un objetivo"
+        />
       </div>
-    </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {ejerciciosFiltrados.map((ej, index) => (
+          <div
+            key={index}
+            className="rounded-xl overflow-hidden border border-gray-700 bg-[#1e1e2f] text-white shadow-md hover:scale-[1.01] transition"
+          >
+            <img
+              src={ej.imagen}
+              alt={ej.nombre}
+              className="w-full h-40 object-cover"
+            />
+            <div className="p-4 space-y-1">
+              <h4 className="text-base font-semibold">{ej.nombre}</h4>
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <ClockIcon className="w-4 h-4 text-orange-400" />
+                {ej.duracion}
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-300">
+                <FlameIcon className="w-4 h-4 text-orange-400" />
+                {ej.repeticiones}
+              </div>
+            </div>
+            <div className="p-2 pr-3 flex justify-end">
+              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
+                <PlayIcon className="text-white w-4 h-4" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </ComponentCard>
   );
 }
