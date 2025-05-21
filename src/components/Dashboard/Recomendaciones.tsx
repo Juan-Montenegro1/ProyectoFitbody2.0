@@ -24,7 +24,7 @@ export default function EcommerceMetrics() {
               className="w-32 h-32 rounded-xl object-cover"
             />
             <div className="ml-4">
-              <h4 className="font-bold text-gray-800 text-title-sm dark:text-white/90">
+              <h4 className="font-bold text-gray-800 dark:text-white/90 text-base leading-snug break-words">
                 Guía de proteínas y suplementos
               </h4>
             </div>

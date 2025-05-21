@@ -1,8 +1,5 @@
-import Recomendaciones from "../../components/Dashboard/recomendaciones";
+import Recomendaciones from "../../components/Dashboard/Recomendaciones";
 import Desafio from "../../components/Dashboard/Desafio";
-import StatisticsChart from "../../components/Dashboard/StatisticsChart";
-import MonthlyTarget from "../../components/Dashboard/MonthlyTarget";
-import RecentOrders from "../../components/Dashboard/RecentOrders";
 import DemographicCard from "../../components/Dashboard/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
 
