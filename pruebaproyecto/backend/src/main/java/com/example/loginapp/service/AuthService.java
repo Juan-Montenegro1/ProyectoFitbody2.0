@@ -37,15 +37,22 @@ public class AuthService {
         Role userRole = roleRepository.findByName("ROLE_USER")
             .orElseThrow(() -> new RuntimeException("Role not found"));
 
-        Gender gender = Arrays.stream(Gender.values())
-        .filter(g -> g.name().equalsIgnoreCase(request.getGender()))
-        .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("Invalid gender"));
+        // SOLO si gender y goal NO son nulos:
+        Gender gender = null;
+        if (request.getGender() != null) {
+        gender = Arrays.stream(Gender.values())
+                .filter(g -> g.name().equalsIgnoreCase(request.getGender()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid gender"));
+        }
 
-        FitnessGoal goal = Arrays.stream(FitnessGoal.values())
-        .filter(g -> g.name().equalsIgnoreCase(request.getGoal()))
-        .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("Invalid fitness goal"));
+        FitnessGoal goal = null;
+        if (request.getGoal() != null) {
+        goal = Arrays.stream(FitnessGoal.values())
+                .filter(g -> g.name().equalsIgnoreCase(request.getGoal()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid fitness goal"));
+        }
 
 
         User user = User.builder()
@@ -53,13 +60,14 @@ public class AuthService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .weight(request.getWeight())
+                .weight(request.getWeight()) // puede ser null
                 .age(request.getAge())
                 .height(request.getHeight())
                 .gender(gender)
                 .goal(goal)
                 .roles(Collections.singleton(userRole))
                 .build();
+
 
         userRepository.save(user);
         

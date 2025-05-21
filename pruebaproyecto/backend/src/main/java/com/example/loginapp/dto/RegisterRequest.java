@@ -19,4 +19,5 @@ public class RegisterRequest {
     private Double height;
     private String gender;
     private String goal;
+    
 }

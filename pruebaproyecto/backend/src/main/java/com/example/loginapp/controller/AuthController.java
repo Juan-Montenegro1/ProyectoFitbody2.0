@@ -11,10 +11,11 @@ import com.example.loginapp.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
