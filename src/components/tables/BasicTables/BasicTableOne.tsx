@@ -16,7 +16,7 @@ const ejercicios = [
     nombre: "Curl con barra",
     duracion: "10 Min",
     repeticiones: "3 Rep",
-    imagen: "/images/ejercicios/curl-barra.jpg",
+    imagen: "/images/logo/fitbodyblack.png", /*/images/ejercicios/curl-barra.jpg*/
     objetivos: ["ganar", "aumentar"],
   },
   {
@@ -24,7 +24,7 @@ const ejercicios = [
     nombre: "Caminata rápida",
     duracion: "20 Min",
     repeticiones: "1 Sesión",
-    imagen: "/images/ejercicios/cardio.jpg",
+    imagen: "/images/logo/fitbodyblack.png",
     objetivos: ["perder", "mantener"],
   },
   {
@@ -40,7 +40,7 @@ const ejercicios = [
     nombre: "Crunch abdominal",
     duracion: "10 Min",
     repeticiones: "3 Rep",
-    imagen: "/images/ejercicios/crunch.jpg",
+    imagen: "/images/logo/fitbodyblack.png",
     objetivos: ["perder", "mantener"],
   },
   {
@@ -48,7 +48,7 @@ const ejercicios = [
     nombre: "Remo con barra",
     duracion: "15 Min",
     repeticiones: "4 Rep",
-    imagen: "/images/ejercicios/remo-barra.jpg",
+    imagen: "/images/logo/fitbodyblack.png",
     objetivos: ["ganar", "aumentar"],
   },
 ];
