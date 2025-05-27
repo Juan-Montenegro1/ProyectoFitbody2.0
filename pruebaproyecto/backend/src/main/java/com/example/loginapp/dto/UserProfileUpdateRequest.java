@@ -1,20 +1,15 @@
 package com.example.loginapp.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class UpdateProfileRequest {
+public class UserProfileUpdateRequest {
     private String firstName;
     private String lastName;
     private Double weight;
     private Integer age;
+    private String country;
     private Double height;
     private String gender;
     private String goal;
-}
+}    

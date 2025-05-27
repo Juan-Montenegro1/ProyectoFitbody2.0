@@ -62,6 +62,7 @@ public class AuthService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .weight(request.getWeight()) // puede ser null
                 .age(request.getAge())
+                .country(request.getCountry())
                 .height(request.getHeight())
                 .gender(gender)
                 .goal(goal)

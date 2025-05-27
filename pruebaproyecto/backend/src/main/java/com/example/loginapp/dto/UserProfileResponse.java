@@ -13,6 +13,7 @@ public class UserProfileResponse {
     private String email;
     private Double weight;
     private Integer age;
+    private String country;
     private Double height;
     private String gender;
     private String goal;
@@ -25,6 +26,7 @@ public class UserProfileResponse {
                 .weight(user.getWeight())
                 .age(user.getAge())
                 .height(user.getHeight())
+                .country(user.getCountry())
                 .gender(user.getGender().toString())
                 .goal(user.getGoal().toString())
                 .build();

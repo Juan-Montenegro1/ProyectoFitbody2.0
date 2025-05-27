@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.example.loginapp.enums.FitnessGoal;
 import com.example.loginapp.enums.Gender;
-import com.example.loginapp.model.Role;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -52,6 +51,7 @@ public class User implements UserDetails {
     private Double weight; // en kg
     private Integer age;
     private Double height; // en cm
+    private String country;
     
     @Enumerated(EnumType.STRING)
     private Gender gender;
